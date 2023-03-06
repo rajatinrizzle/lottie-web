@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+                <html>
+                
+                <head>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
+                    <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
+                
+                </head>
+                
+                <div id="animation-container"></div>
+                
+                <button onclick="renderNextFrame()">Click</button>
+                
+                <style>
+                    body {
+                        margin: 0%;
+                    }
+                </style>
+                
+                <body>
+                
+                    <script>
+                    
+                        let animation
+                        
+                        function loadData(base64font, jsonData) {
+                            let url = "url(data:font/truetype;charset=utf-8;base64," + base64font + ") format('truetype')";
+                            let font = new FontFace('Poppins-Bold', url);
+                            font.load().then(function (loadedFace) {
+                                console.log('Font Loaded');
+                                loadJson(jsonData);
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+                        }
+                        
+                         function loadFont(base64font) {
+                            let url = "url(data:font/truetype;charset=utf-8;base64," + base64font + ") format('truetype')";
+                            let font = new FontFace('Poppins-Bold', url);
+                            font.load().then(function (loadedFace) {
+                                console.log(base64font);
+                               
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+                        }
+                
+                        function loadJson(jsonData) {
+
+                            animation = bodymovin.loadAnimation({
+                                container: document.getElementById('animation-container'),
+                                renderer: 'svg', // Required
+                                loop: false,
+                                animationData: JSON.parse(jsonData),
+                                name: "Hello World",
+                            })
+                
+                            animation.pause()
+                            animation.renderer.elements[0].canResizeFont(true);
+                            changeText()
+                            console.log(animation)
+                
+                            animation.addEventListener('enterFrame', function () {                             
+                                if(frameCount < 180){
+                                    frameCount++
+                                    const frameEvent = new Event('onNewFrame');
+                                    frameEvent.value = frameCount;
+                                    document.dispatchEvent(frameEvent);
+                                }
+                                
+                            })
+                
+                        }
+                
+                        var progress = 0;
+                        frameCount = 0;
+                        function renderNextFrame() {
+                            progress = progress + 0.7056; // 6 sec duration
+                            animation.goToAndStop(progress, true)                
+                        }
+                
+                        function changeText() {
+                            animation.renderer.elements[0].updateDocumentData({ t: 'Domestic LPG price hiked by Rs 50 per 14.2-kg cylinder, first hike since July 2022', f: 'Poppins-Bold', s: '300' }, 0);
+                        }
+                                
+                    </script>
+                
+                </body>
+                
+            </html>
