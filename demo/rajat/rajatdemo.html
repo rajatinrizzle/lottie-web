@@ -16,7 +16,7 @@
         //fetchJson()
 
         function fetchJson() {
-            fetch('./data01.json')
+            fetch('./data04.json')
                 .then((response) => response.json())
                 .then((json) => {
                     loadJsonData(json)
@@ -44,11 +44,14 @@
             })
         }
         function updateText() {
+            animation.renderer.elements[0].canResizeFont(true);
+            console.log(animation.renderer.elements[0].canResize)
             animation.renderer.elements[0].updateDocumentData({ f: "Poppins-Bold", t: 'Domestic LPG price hiked by Rs 50 per 14.2-kg cylinder, first hike since July 2022' }, 0);
             //animation.renderer.elements[0].updateDocumentData({ f: "Poppins-Bold", t: 'Rajat' }, 0);
             //animation.renderer.elements[0].updateDocumentData({ t: 'Rajat' }, 0);
             //animation.setSpeed(0.2);
             //animation.setSpeed(0.2);
+            //animation.renderer.elements[0].updateDocumentData({ f: "Poppins-Bold", t: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' }, 0);
             animation.play();
         }
 
@@ -60,7 +63,7 @@
                     let url = "url(data:font/truetype;charset=utf-8;base64," + base64 + ") format('truetype')";
                     let molotFont = new FontFace('Poppins-Bold', url)
                     molotFont.load().then(function (loadedFace) {
-                        console.log(document.fonts)
+                        //console.log(document.fonts)
                         fetchJson()
                     }).catch(function (error) {
                         console.log(error)

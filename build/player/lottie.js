@@ -10247,7 +10247,7 @@
     this.elem = elem;
     this.comp = this.elem.comp;
     this.keysIndex = 0;
-    this.canResize = true; //false;
+    this.canResize = false;
     this.minimumFontSize = 1;
     this.effectsSequence = [];
     this.currentData = {
@@ -10471,7 +10471,7 @@
     var trackingOffset = documentData.tr / 1000 * documentData.finalSize;
     var charCode;
 
-    console.log('tag', 'documentData', documentData.finalSize)
+    //console.log('tag', 'documentData', documentData.finalSize)
 
     if (documentData.sz) {
       var flag = true;
@@ -10492,7 +10492,7 @@
           charCode = finalText[i].charCodeAt(0);
           newLineFlag = false;
 
-          console.log('boxHeight', boxHeight, 'currentHeight', currentHeight)
+          //console.log('boxHeight', boxHeight, 'currentHeight', currentHeight)
           if (false) { //boxHeight < currentHeight) {
             console.log('not executing');
             flag = false;
@@ -10533,18 +10533,17 @@
         }
 
         currentHeight += fontData.ascent * documentData.finalSize / 100;
-        console.log('boxHeight', boxHeight, 'currentHeight', currentHeight)
+        //console.log('boxHeight', boxHeight, 'currentHeight', currentHeight)
 
-
+        console.log('canResize', this.canResize)
         if (this.canResize && documentData.finalSize > this.minimumFontSize && boxHeight < currentHeight) {
-          console.log('canResize is true')
           documentData.finalSize -= 1;
           documentData.finalLineHeight = documentData.finalSize * documentData.lh / documentData.s;
         } else {
           documentData.finalText = finalText;
           len = documentData.finalText.length;
           flag = false;
-          console.log('finalText', finalText)
+          //console.log('finalText', finalText)
         }
       }
     }
@@ -10579,8 +10578,8 @@
         // var charWidth = fontManager.measureText(val, documentData.f, documentData.finalSize);
         // tCanvasHelper.font = documentData.finalSize + 'px '+ fontManager.getFontByName(documentData.f).fFamily;
         cLength = fontManager.measureText(val, documentData.f, documentData.finalSize);
-      } 
-      console.log(currentChar, cLength)
+      }
+      //console.log(currentChar, cLength)
 
       if (currentChar === ' ') {
         uncollapsedSpaces += cLength + trackingOffset;

@@ -7,7 +7,7 @@
 
 </head>
 
-<div id="myElement" height: 200px; width: 50px;></div>
+<div id="myElement"></div>
 
 <button onclick="renderNextFrame()">Click</button>
 
@@ -102,6 +102,7 @@
             console.log(animation)
             //animation.renderer.elements[0].updateDocumentData({ t: 'This is first line.  This is second', f: 'Poppins-Bold', s: '23' }, 0);
             animation.renderer.elements[0].updateDocumentData({ t: 'This is first line. This is second', f: 'Molot', s: '65' }, 0);
+            animation.renderer.elements[0].canResizeFont(true);
         }
 
 
