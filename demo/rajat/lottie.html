@@ -2,7 +2,7 @@
 <html style="width: 100%;height: 100%">
 
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
 </head>
 
 <button onclick="fetchJson()">Load</button>
@@ -21,24 +21,22 @@
 
     <script>
 
-
-        function printRajat(first, last) {
-            console.log(first, last)
-        }
-
-        printRajat('rajat','sangrame');
         function fetchJson() {
             fetch('./fonts/poppinsbase64.txt')
                 .then((response) => response.text())
                 .then((base64font) => {
                     console.log(base64font);
-                    fetch('./data04.json')
+                    fetch('./data07.json')
                         .then((response) => response.text())
                         .then((jsonData) => {
                             console.log(jsonData);
                             loadData(base64font, jsonData);
                         });
                 });
+
+            setTimeout(function () { 
+                changeData()
+            }, 300)
         }
 
         // This must be called be called from client side
@@ -63,18 +61,19 @@
         let animation;
         let frameCount = 0;
         function loadAnimation(jsonData) {
+            frameCount = 0;
             animation = bodymovin.loadAnimation({
                 container: document.getElementById('bodymovin'),
                 renderer: 'svg',
                 loop: false,
-                autoplay: false,
+                autoplay: true,
                 animationData: JSON.parse(jsonData),
                 name: "Rizzle",
             })
             animation.renderer.elements[0].canResizeFont(true);
 
             console.log('canResize', animation.renderer.elements[0].textProperty.canResize);
-            animation.pause();
+            //animation.pause();
             animation.addEventListener('enterFrame', function () {
                 frameCount++;
                 const frameEvent = new Event('onNewFrame');
@@ -119,12 +118,14 @@
 
         // region test       
         function changeData() {
+
+
             changeText('Domestic LPG price hiked by Rs 50 per 14.2-kg cylinder, first hike since July 2022');
             changeFont('Poppins-Bold');
             changeFontColor([0.555, 08884, 0.3664, 1]);
-            //changeFontSize(50);
+            changeFontSize(50);
 
-            console.log(textData)
+            //console.log(textData)
         }
         // endregion
 
